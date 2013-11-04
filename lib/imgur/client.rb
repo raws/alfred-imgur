@@ -19,8 +19,8 @@ module Imgur
       response = self.class.post('/3/image.json', options)
 
       if response.code == 200
-        response['data']['link'].tap do |url|
-          logger.info "Uploaded #{file_path} to #{url}"
+        Upload.new(id: response['data']['id'], link: response['data']['link']).tap do |upload|
+          logger.info "Uploaded #{file_path} to #{upload.link}"
         end
       elsif access_token_has_expired?(response)
         logger.info 'Access token has expired. Refreshing it and retrying...'

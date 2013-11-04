@@ -106,7 +106,7 @@ else
 
   Imgur::Client.notify message, subtitle: "Image#{urls.size == 1 ? '' : 's'} uploaded"
 
-  print urls.join("\n")
+  print urls.map(&amp;:link).join("\n")
 end</string>
 				<key>type</key>
 				<integer>2</integer>
