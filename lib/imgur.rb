@@ -7,3 +7,4 @@ require 'logger'
 require 'terminal-notifier'
 
 require 'imgur/client'
+require 'imgur/upload'
