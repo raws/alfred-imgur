@@ -153,7 +153,7 @@ class Imgur
       {}
     end
   rescue => e
-    logger.fatal "Could not read settings from #{SETTINGS_PATH}: #{e}"
+    logger.error "Could not read settings from #{SETTINGS_PATH}: #{e}"
     {}
   end
 
