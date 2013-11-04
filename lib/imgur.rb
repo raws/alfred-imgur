@@ -30,13 +30,8 @@ class Imgur
         logger.info "Uploaded #{file_path} to #{url}"
       end
     else
-      message = "An error occurred while attempting to upload #{file_path}: "
-
-      if response['data'] && response['data']['error']
-        message << response['data']['error']['message']
-      end
-
-      message << " (HTTP #{response.code})"
+      message = "An error occurred while attempting to upload #{file_path}: " +
+        "#{response.parsed_response.inspect} (HTTP #{response.code})"
       logger.error message
 
       nil
