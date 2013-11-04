@@ -85,16 +85,17 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>require './lib/imgur'
+				<string>$:.unshift Dir.pwd + '/lib'
+require 'imgur'
 
-imgur = Imgur.new
+client = Imgur::Client.new
 
 urls = "{query}".split("\t").map do |file_path|
-  imgur.upload(file_path)
+  client.upload(file_path)
 end.compact
 
 if urls.empty?
-  Imgur.notify "Could not upload the image#{urls.size == 1 ? '' : 's'} " +
+  Imgur::Client.notify "Could not upload the image#{urls.size == 1 ? '' : 's'} " +
     'you selected.', subtitle: 'An error occurred'
 else
   message = if urls.size == 1
@@ -103,7 +104,7 @@ else
     "Copied #{urls.size} links to the clipboard."
   end
 
-  Imgur.notify message, subtitle: "Image#{urls.size == 1 ? '' : 's'} uploaded"
+  Imgur::Client.notify message, subtitle: "Image#{urls.size == 1 ? '' : 's'} uploaded"
 
   print urls.join("\n")
 end</string>
