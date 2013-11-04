@@ -9,8 +9,8 @@ require 'terminal-notifier'
 class Imgur
   BUNDLE_ID = 'com.rosspaffett.alfred.imgur'
   DATA_PATH = File.expand_path("~/Library/Application Support/Alfred 2/Workflow Data/#{BUNDLE_ID}")
-  IMGUR_CLIENT_ID = '8a9f16635266dde'
-  IMGUR_CLIENT_SECRET = '20ec69f09cb38bd17de0857b5f4cf27057d85c09'
+  IMGUR_CLIENT_ID = '2aa10e158556a25'
+  IMGUR_CLIENT_SECRET = '1a60f2bd5d604ba24771ba382991fb809a72e9af'
   LOG_PATH = File.expand_path("~/Library/Logs/#{BUNDLE_ID}.log")
   SETTINGS_PATH = DATA_PATH + '/settings.json'
 
