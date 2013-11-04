@@ -29,11 +29,13 @@ class Imgur
       response['data']['link'].tap do |url|
         logger.info "Uploaded #{file_path} to #{url}"
       end
+    elsif access_token_has_expired?(response)
+      logger.info 'Access token has expired. Refreshing it and retrying...'
+      refresh_access_token
+      upload(file_path)
     else
-      message = "An error occurred while attempting to upload #{file_path}: " +
+      logger.error "An error occurred while attempting to upload #{file_path}: " +
         "#{response.parsed_response.inspect} (HTTP #{response.code})"
-      logger.error message
-
       nil
     end
   end
@@ -46,6 +48,10 @@ class Imgur
 
   def access_token_from_cache
     settings['access_token']
+  end
+
+  def access_token_has_expired?(response)
+    response.code == 403 && response['data']['error'] =~ /access token.*?expired/i
   end
 
   def display_dialog(message, prompt_for_answer = false)
@@ -80,6 +86,25 @@ class Imgur
       write_settings
 
       settings['access_token']
+    end
+  end
+
+  def exchange_refresh_token_for_access_token
+    options = {
+      query: {
+        client_id: IMGUR_CLIENT_ID,
+        client_secret: IMGUR_CLIENT_SECRET,
+        grant_type: 'refresh_token',
+        refresh_token: settings['refresh_token']
+      }
+    }
+
+    response = self.class.post('/oauth2/token', options)
+
+    if response.code == 200
+      settings['access_token'] = response['access_token']
+      settings['refresh_token'] = response['refresh_token']
+      write_settings
     end
   end
 
@@ -130,6 +155,14 @@ class Imgur
   rescue => e
     logger.fatal "Could not read settings from #{SETTINGS_PATH}: #{e}"
     {}
+  end
+
+  def refresh_access_token
+    if settings['refresh_token']
+      exchange_refresh_token_for_access_token
+    else
+      prompt_for_authorization
+    end
   end
 
   def settings
