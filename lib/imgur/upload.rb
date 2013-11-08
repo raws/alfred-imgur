@@ -8,8 +8,8 @@ module Imgur
       @link = options[:link]
     end
 
-    def error?
-      !error.nil?
+    def successful?
+      error.nil?
     end
   end
 end
