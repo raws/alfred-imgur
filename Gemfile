@@ -10,5 +10,7 @@ group :development do
 end
 
 group :test do
+  gem 'bourne', '~> 1.5.0'
+  gem 'mocha', '~> 0.14.0'
   gem 'test-unit', '~> 2.5.5'
 end
