@@ -89,25 +89,8 @@
 require 'imgur'
 
 client = Imgur::Client.new
-
-urls = "{query}".split("\t").map do |file_path|
-  client.upload(file_path)
-end.compact
-
-if urls.empty?
-  Imgur::Client.notify "Could not upload the image#{urls.size == 1 ? '' : 's'} " +
-    'you selected.', subtitle: 'An error occurred'
-else
-  message = if urls.size == 1
-    'Copied one link to the clipboard.'
-  else
-    "Copied #{urls.size} links to the clipboard."
-  end
-
-  Imgur::Client.notify message, subtitle: "Image#{urls.size == 1 ? '' : 's'} uploaded"
-
-  print urls.map(&amp;:link).join("\n")
-end</string>
+paths = "{query}".split("\t")
+uploads = paths.map { |path| client.upload(path) }</string>
 				<key>type</key>
 				<integer>2</integer>
 			</dict>
