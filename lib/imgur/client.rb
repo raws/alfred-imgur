@@ -107,13 +107,8 @@ module Imgur
       end
     end
 
-    def notify(*args)
-      self.class.notify(*args)
-    end
-
-    def self.notify(message, options = {})
-      options = { title: 'Upload to Imgur', sender: 'com.runningwithcrayons.Alfred-2' }.merge(options)
-      TerminalNotifier.notify message, options
+    def notify(message, options = {})
+      Notification.new(message, options).notify
     end
 
     def open_authorization_prompt_in_browser
