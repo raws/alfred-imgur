@@ -86,7 +86,7 @@ batch.copy</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Upload to Imgur 0.0.1
+	<string>Upload to Imgur 1.0.0
 by Ross Paffett
 
 This Alfred workflow uploads the images you currently have selected in the Finder to your Imgur account.
