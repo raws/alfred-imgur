@@ -2,6 +2,10 @@
 
 An [Alfred](http://www.alfredapp.com) workflow for uploading images to your [Imgur](http://imgur.com) account.
 
+### Installation
+
+To install the workflow, download [the latest release](https://github.com/raws/alfred-imgur/releases) and double-click the workflow file. Alfred will install it automatically.
+
 ### Usage
 
 Select one or more image files in the Finder and press the global keyboard shortcut specified in the Alfred workflow.
