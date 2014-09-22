@@ -13,7 +13,7 @@ module Imgur
     end
 
     def notify
-      TerminalNotifier.notify(message, options)
+      TerminalNotifier.notify message, options
     end
   end
 end

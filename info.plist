@@ -7,16 +7,7 @@
 	<key>connections</key>
 	<dict>
 		<key>521C5FD2-B4F0-46E3-8FCA-9FB6F1D91DAF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E99FC310-35BB-49DA-B2CC-CC87C1277D0E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-			</dict>
-		</array>
+		<array/>
 		<key>B9F808F8-7137-477C-B386-55180E413664</key>
 		<array>
 			<dict>
@@ -42,21 +33,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>E99FC310-35BB-49DA-B2CC-CC87C1277D0E</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -71,13 +47,15 @@
 				<false/>
 				<key>modsmode</key>
 				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>B9F808F8-7137-477C-B386-55180E413664</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -88,9 +66,12 @@
 				<string>$:.unshift Dir.pwd + '/lib'
 require 'imgur'
 
-client = Imgur::Client.new
 paths = "{query}".split("\t")
-uploads = paths.map { |path| client.upload(path) }</string>
+batch = Imgur::Batch.new(paths)
+
+batch.upload
+batch.notify
+batch.copy</string>
 				<key>type</key>
 				<integer>2</integer>
 			</dict>
@@ -112,11 +93,6 @@ uploads = paths.map { |path| client.upload(path) }</string>
 			<real>60</real>
 		</dict>
 		<key>B9F808F8-7137-477C-B386-55180E413664</key>
-		<dict>
-			<key>ypos</key>
-			<real>60</real>
-		</dict>
-		<key>E99FC310-35BB-49DA-B2CC-CC87C1277D0E</key>
 		<dict>
 			<key>ypos</key>
 			<real>60</real>

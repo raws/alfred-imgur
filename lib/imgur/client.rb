@@ -20,14 +20,18 @@ module Imgur
 
       if response.code == 200
         Upload.new(id: response['data']['id'], link: response['data']['link']).tap do |upload|
-          logger.info "Uploaded #{file_path} to #{upload.link}"
+          logger.info "Uploaded #{file_path.inspect} to #{upload.link.inspect}"
         end
       elsif access_token_has_expired?(response)
         logger.info 'Access token has expired. Refreshing it and retrying...'
         refresh_access_token
-        upload(file_path)
+        upload file_path
+      elsif access_token_is_invalid?(response)
+        logger.info 'Access token is invalid. Prompting user to reauthorize...'
+        prompt_for_authorization
+        upload file_path
       else
-        logger.error "An error occurred while attempting to upload #{file_path}: " +
+        logger.error "An error occurred while attempting to upload #{file_path.inspect}: " +
           "#{response.parsed_response.inspect} (HTTP #{response.code})"
         nil
       end
@@ -45,6 +49,10 @@ module Imgur
 
     def access_token_has_expired?(response)
       response.code == 403 && response['data']['error'] =~ /access token.*?expired/i
+    end
+
+    def access_token_is_invalid?(response)
+      response.code == 403 && response['data']['error'] =~ /access token.*?invalid/i
     end
 
     def display_dialog(message, prompt_for_answer = false)
