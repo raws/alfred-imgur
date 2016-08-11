@@ -1,7 +1,7 @@
 module Imgur
   class Client
     BUNDLE_ID = 'com.rosspaffett.alfred.imgur'
-    DATA_PATH = File.expand_path("~/Library/Application Support/Alfred 2/Workflow Data/#{BUNDLE_ID}")
+    DATA_PATH = File.expand_path("~/Library/Application Support/Alfred 3/Workflow Data/#{BUNDLE_ID}")
     IMGUR_CLIENT_ID = '2aa10e158556a25'
     IMGUR_CLIENT_SECRET = '1a60f2bd5d604ba24771ba382991fb809a72e9af'
     LOG_PATH = File.expand_path("~/Library/Logs/#{BUNDLE_ID}.log")
