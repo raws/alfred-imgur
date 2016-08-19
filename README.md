@@ -26,6 +26,11 @@ The workflow records all uploads and errors to:
 
 You can view the log using Console.
 
+### Contributors
+
+* [Donni Katzovicz](https://github.com/raws/alfred-imgur/commits?author=DolandJW)
+* [Ross Paffett](https://github.com/raws/alfred-imgur/commits?author=raws)
+
 ### License
 
 (The MIT license)
